@@ -1,12 +1,47 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import FlowForm from './FlowForm';
+import { Card } from 'react-bootstrap';
 import * as serviceWorker from './serviceWorker';
+
+const schema = {
+  "title": "A registration form",
+  "description": "A simple form example.",
+  "type": "object",
+  "required": [
+    "firstName",
+    "lastName"
+  ],
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "title": "First name",
+      "default": "Chuck"
+    },
+    "lastName": {
+      "type": "object",
+      "title": "Last name",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "title": "Surname",
+          "default": "Taylor"
+        }
+      }
+    },
+    "telephone": {
+      "type": "string",
+      "title": "Telephone",
+      "minLength": 10
+    }
+  }
+};
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Card style={{ width: '50rem' }}>
+      <FlowForm schema={schema} />
+    </Card>
   </React.StrictMode>,
   document.getElementById('root')
 );
